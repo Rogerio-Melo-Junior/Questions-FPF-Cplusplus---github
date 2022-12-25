@@ -1,4 +1,4 @@
-// primeira versão estática de solução do problema com limite de 100 elementos.
+// primeira versão estática de solução do problema com limite de 1000 elementos.
 #include <bits/stdc++.h> 
 #define _ ios_base::sync_with_stdio(0); // uso de macro para reduzir o tempo de execução.
 
@@ -8,7 +8,7 @@ int main(){_
    int i,n,pos; //declaração das variáveis. A variável 'i' é o índice do loop, 
                 //a variável 'n' é a qtd de elementos do vetor, a variável 'pos' é a posição que será usada nos vetores 'A' e 'B'
                 // no momento de virar(setar em '1') as cartas.  
-   int P[101],A[101] = {},B[101] = {};
+   int P[1001],A[1001] = {},B[1001] = {};
       // os vetores 'A' e 'B' serão usados como cartas viradas para baixo, sendo indicadas pelo valor 0.
       // o vet
    cin >> n; // leitura da qtd de elementos a serem lidos pelo vetor.
