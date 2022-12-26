@@ -6,12 +6,13 @@
 
     int main(){_ 
     int i; //percorre como índice
-    int N,pos,maior_pos=0; //declaração das variáveis.
+    int N,pos,maior_pos=0,maior_pos_neg=0; //declaração das variáveis.
                     //a variável 'n' é a qtd de elementos do vetor, a variável 'pos' é a posição que será usada nos vetores 'A' e 'B'
                     // no momento de virar(setar em '1') as cartas.  
     int *P, *A, *B; //Declaração de ponteiros
         // os vetores 'A' e 'B' serão usados como cartas viradas para baixo, sendo indicadas pelo valor 0.
         // o vet
+    int *A_negativos,*B_negativos;
     cin >> N; // leitura da qtd de elementos a serem lidos pelo vetor.
     cin.ignore(); 
     if(N%2==1){    // o número de elementos tem que ser ímpar.
@@ -22,39 +23,71 @@
             pos = P[i];
             if(pos>maior_pos)
                 maior_pos = pos;
+            else
+                if(abs(pos)>maior_pos_neg)
+                     maior_pos_neg = abs(pos);
+        
       }
     
-      A = new (nothrow) int[maior_pos](); //tornando o ponteiro '*A', um vetor 'A' de 'maior_pos' posições.
+      A = new (nothrow) int[maior_pos+1](); //tornando o ponteiro '*A', um vetor 'A' de 'maior_pos' posições.
                                 // O uso de '()' ao final da linha é para setar os valores nas posições do vetor 'A' em '0'.
-      B = new (nothrow) int[maior_pos](); //tornando o ponteiro '*A', um vetor 'B' de 'maior_pos' posições.
+      B = new (nothrow) int[maior_pos+1](); //tornando o ponteiro '*A', um vetor 'B' de 'maior_pos' posições.
                                 // O uso de '()' ao final da linha é para setar os valores nas posições do vetor 'B' em '0'.
-    
-      if(!A || !B){  //profilaxia para caso haja problema com as memórias de A ou B no momento da alocação. 
+      A_negativos = new (nothrow) int[maior_pos_neg+1](); //tornando o ponteiro '*A', um vetor 'A' de 'maior_pos' posições.
+                                // O uso de '()' ao final da linha é para setar os valores nas posições do vetor 'A' em '0'.
+      B_negativos = new (nothrow) int[maior_pos_neg+1](); //tornando o ponteiro '*A', um vetor 'B' de 'maior_pos' posições.
+                                // O uso de '()' ao final da linha é para setar os valores nas posições do vetor 'B' em '0'.
+      
+      if(!A || !B || !A_negativos || !B_negativos){  //profilaxia para caso haja problema com as memórias de A ou B no momento da alocação. 
          cout << "Erro: Memória Insuficiente!"<< endl;   
           return 0; //Sai do programa.
       }
       else{
-         for(i=0 ; i<N ; i++){
+          for(i=0 ; i<N ; i++){
             pos = P[i];
-            if(A[pos] == 0){
-            A[pos] = 1; // Virou a primeira carta.
-            }
-            else{
-                if(B[pos] == 0)
-                       B[pos] = 1; // Virou a carta 'par' correspondente.
-            }
+               if(pos>0){
+                if(A[pos] == 0){
+                   A[pos] = 1; // Virou a primeira carta.
+                }   
+                 else{
+                      if(B[pos] == 0)
+                          B[pos] = 1; // Virou a carta 'par' correspondente.
+                }
+               }
+               else{
+                 pos = abs(pos);
+                 if(A_negativos[pos] == 0){
+                   A_negativos[pos] = 1; // Virou a primeira carta.
+                }   
+                 else{
+                      if(B_negativos[pos] == 0)
+                          B_negativos[pos] = 1; // Virou a carta 'par' correspondente.
+                }  
+               }
          } 
-
+      
          for(i=0 ; i<N ; i++){
            pos = P[i];
-            if(B[pos] == 0){  // Verificando a existência de uma carta sem seu 'par'.
-                  cout << pos << endl; // Saída com a carta sem seu 'par'.
-                return 0;
-            }
+                if(pos>0){ 
+                 if(B[pos] == 0){  // Verificando a existência de uma carta sem seu 'par'.
+                    cout << pos << endl; // Saída com a carta sem seu 'par'.
+                   return 0;
+                 }
+                }
+                else{
+                  pos = abs(pos);
+                  if(B_negativos[pos] == 0){  // Verificando a existência de uma carta sem seu 'par'.
+                    cout << (-1)*pos << endl; // Saída com a carta sem seu 'par'.
+                   return 0;
+                  }  
+                }
          }
-       delete[] P; // libera o array alocado previamente;
-       delete[] A;  
-       delete[] B; 
+       delete[] P; // libera o array alocado previamente.
+       delete[] A; // libera o array alocado previamente.
+       delete[] B; // libera o array alocado previamente.
+       
+       delete[] A_negativos; // libera o array alocado previamente.
+       delete[] B_negativos; // libera o array alocado previamente.
       }
     }
     else{ // caso o valor N digitado pelo usuário seja par, o programa apresentará essa msg
