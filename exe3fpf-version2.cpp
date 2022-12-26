@@ -59,10 +59,10 @@ int exercise3(int a[],int n){ //parâmetros: primeiro endereço de memória do v
     
 }
    
-int main(){_
-   int i,n;
-   cin >> n;  // números de elementos que será lido no vetor.
-   cin.ignore();
+int main(){_ //uso da macro '_'.
+   int i,n; // declaração das variáveis índice e tamanho do vetor a ser alocado.
+   cin >> n;  // números de elementos que serão lidos no vetor.
+   cin.ignore(); //libera o buffer de leitura.
    
    int *P = new (nothrow) int[n];
      if(!P){ // verifica se a memória para a alocação está funcionando normalmente.

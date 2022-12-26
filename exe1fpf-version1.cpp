@@ -5,18 +5,18 @@
 using namespace std;
 
 int countSetBits(int X){
-    if(X == 0) // caso base
+    if(X == 0) // Caso base
        return 0;
     else  
-      return (X & 1) + countSetBits(X >> 1); // soma o bit recursivamente e desloca o bit menos significativo 
+      return (X & 1) + countSetBits(X >> 1); // Soma o bit recursivamente e desloca o bit menos significativo para a direita 
 }
 int exercise1(int a, int b){ // parâmetros de entrada da função
     int P;   //variáveis locais da função
-    P = a*b;
+    P = a*b; //produto das entradas da função
     return countSetBits(P); // função que retorna a soma dos bits
 }
 
-int main(){_
+int main(){_ //uso da macro '_'.
     int *A = new (nothrow) int; // Declaração dos ponteiros de inteiros e alocação de inteiros.
     int *B = new (nothrow) int; 
     
@@ -25,7 +25,7 @@ int main(){_
     
     cin >> *A >> *B; // Entrada dos números a serem multiplicados.
     
-    if((*A)<0 || (*B)<0){
+    if((*A)<0 || (*B)<0){ 
         cout << "Apenas inteiros positivos!!" << endl;
     }
     else{
